@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://luglio2019_server_01.mycompany.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ServiceImplService" targetNamespace="http://luglio2019_server_01.mycompany.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://luglio2019_server_01.mycompany.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://luglio2019_server_01.mycompany.com/">
+  <xs:element name="MovieDetail" type="tns:movieDetail"/>
+  <xs:element name="getMoiviesList" type="tns:getMoiviesList"/>
+  <xs:element name="getMoiviesListResponse" type="tns:getMoiviesListResponse"/>
+  <xs:complexType name="getMoiviesList">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getMoiviesListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:movieDetail"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="movieDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="directorName" type="xs:string"/>
+      <xs:element minOccurs="0" name="directorYearOfBirth" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="year" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SQLException" type="tns:SQLException"/>
+  <xs:complexType name="SQLException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+      <xs:element minOccurs="0" name="sQLState" type="xs:string"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getMoiviesListResponse">
+    <wsdl:part element="tns:getMoiviesListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMoiviesList">
+    <wsdl:part element="tns:getMoiviesList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SQLException">
+    <wsdl:part element="tns:SQLException" name="SQLException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Service">
+    <wsdl:operation name="getMoiviesList">
+      <wsdl:input message="tns:getMoiviesList" name="getMoiviesList">
+    </wsdl:input>
+      <wsdl:output message="tns:getMoiviesListResponse" name="getMoiviesListResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:SQLException" name="SQLException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceImplServiceSoapBinding" type="tns:Service">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getMoiviesList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getMoiviesList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMoiviesListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SQLException">
+        <soap:fault name="SQLException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceImplService">
+    <wsdl:port binding="tns:ServiceImplServiceSoapBinding" name="ServiceImplPort">
+      <soap:address location="http://localhost:8080/Service"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
